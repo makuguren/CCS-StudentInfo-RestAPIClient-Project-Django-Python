@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+
+{% block website_title %} Edit Student {% endblock %}
+
+{% block row %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <a href="/students" class="btn btn-primary float-end">Cancel</a>
+      </div>
+      <div class="card-body table-responsive">
+        <form method = "POST" action={% url 'students:update_student' %} >
+        {% csrf_token %}
+          <div class="mb-3">
+              <label for="student_id" class="form-label">Student ID</label>
+              <input type="text" class="form-control" value="{{ student_data.student_id }}" disabled>
+              <input type="hidden" class="form-control" id="student_id" name="student_id" value="{{ student_data.student_id }}">
+            </div>
+
+            <div class="mb-3">
+              <label for="student_name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="student_name" name="student_name" value="{{ student_data.student_name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="course_section" class="form-label">Course & Section</label>
+                <input type="text" class="form-control" id="course_section" name="course_section" value="{{ student_data.course_section }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="student_email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="student_email" name="student_email" value="{{ student_data.student_email }}" required>
+            </div>
+            {% comment %} <button type="button" onclick="updateStudent()" class="btn btn-primary">Update</button> {% endcomment %}
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
